@@ -1,0 +1,477 @@
+/* =========================================================
+   Vigortrix landing page — replicação do layout urbanflow
+   ========================================================= */
+
+/* ---------- reset ---------- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #000;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+button { border: 0; background: transparent; cursor: pointer; font-family: inherit; color: inherit; }
+
+/* Gate: esconde timer/pricing/comentários até o vídeo atingir 3606s.
+   JS em main.js remove a classe quando smartplayer.ejf8_currentTime >= SECONDS_TO_DISPLAY. */
+.ejf8_gated { display: none; }
+
+/* ---------- top attention bar ---------- */
+.ejf8_attention-bar {
+  background: #c61111;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- headline ---------- */
+.ejf8_headline-section {
+  background: #000;
+  padding: 40px 20px 20px;
+  text-align: center;
+}
+.ejf8_main-headline {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1.5;
+  color: #fff;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ejf8_hl-orange { color: #f49233; }
+
+/* ---------- video ---------- */
+.ejf8_video-section { padding: 15px 0; background: #000; }
+.ejf8_video-wrapper { max-width: 800px; margin: 0 auto; padding: 0 15px; }
+.ejf8_video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+}
+.ejf8_video-embed > img,
+.ejf8_video-embed > div {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+#thumb_67de150abbdcf5aa029d7134 { object-fit: cover; }
+.ejf8_video-backdrop {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+/* ---------- timer / countdown ---------- */
+.ejf8_timer-section {
+  background: #414141;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px 25px;
+  position: relative;
+}
+/* ref: timer headline + countdown são .ejf8_atomicat-heading-title → Poppins */
+.ejf8_timer-section,
+.ejf8_timer-section * {
+  font-family: 'Poppins', sans-serif;
+}
+.ejf8_timer-headline {
+  color: #ffeb00;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.ejf8_timer-countdown {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.ejf8_timer-arrow {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #414141;
+}
+
+/* ---------- pricing ---------- */
+.ejf8_pricing-section {
+  background: #ebebeb;
+  padding: 40px 15px 50px;
+}
+.ejf8_pricing-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+/* Todos os elementos dentro do pricing grid usam Helvetica Neue
+   (= ref .ejf8_pricing-wrapper *). Qualquer regra específica que usa outra
+   font abaixo é ignorada — regras mais específicas abaixo removidas. */
+.ejf8_pricing-grid,
+.ejf8_pricing-grid * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* base card */
+.ejf8_card {
+  flex: 0 1 300px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 3px solid #a6a6a6;
+  border-radius: 18px;
+  overflow: hidden;
+  color: #000;
+  transition: transform .2s, box-shadow .2s;
+  text-align: center;
+  position: relative;
+}
+.ejf8_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,.12);
+}
+
+.ejf8_card-header {
+  background: #a6a6a6;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 8px;
+  font-size: 18px;
+}
+.ejf8_card-body {
+  padding: 20px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.ejf8_card-title {
+  font-size: 19px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.ejf8_card-subtitle { color: #666; font-size: 14px; margin-bottom: 15px; }
+.ejf8_bottle-img {
+  max-width: 200px;
+  margin: 10px auto 15px;
+}
+
+.ejf8_price-row {
+  margin: 15px 0 5px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  align-self: center;   
+}
+.ejf8_price-currency { font-size: 32px; font-weight: 700; }
+.ejf8_price-big {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #2b2b2b;
+}
+.ejf8_price-unit { font-size: 12px; font-weight: 600; color: #2b2b2b; align-self: flex-end; margin-bottom: 12px; }
+
+.ejf8_shipping-note { color: #666; font-size: 14px; margin: 5px 0 15px; }
+
+/* Buy buttons — match reference: retangular w/ cantos 6px, 16px font */
+.ejf8_buy-btn {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform .1s, box-shadow .1s;
+  border: 1px solid transparent;
+  margin: 10px 0 2px;
+  color: #000;
+}
+.ejf8_cart-icon { width: 16px; height: 16px; }
+
+.ejf8_buy-btn-gray {
+  background: linear-gradient(180deg, #ccc 0, #e6e6e6 100%);
+  border-color: #bbb;
+  box-shadow: 0 4px 0 #a6a6a6;
+}
+.ejf8_buy-btn-gray:active { box-shadow: 0 2px 0 #a6a6a6; transform: translateY(2px); }
+
+.ejf8_buy-btn-gold {
+  background: linear-gradient(180deg, #fddb63 0, #fbc02d 100%);
+  border-color: #eb4;
+  box-shadow: 0 4px 0 #bc822c;
+}
+.ejf8_buy-btn-gold:active { box-shadow: 0 2px 0 #bc822c; transform: translateY(2px); }
+
+.ejf8_payment-icons {
+  margin: 10px auto;
+  max-width: 220px;
+  height: auto;
+}
+.ejf8_total-row { margin-top: 10px; font-weight: 800; font-size: 18px; color: #000; }
+.ejf8_strike {
+  text-decoration: line-through;
+  text-decoration-color: #ee484e;
+  -webkit-text-decoration-color: #ee484e;
+  text-decoration-thickness: 2px;
+  color: #999;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+/* Badges — match reference: border-radius 5px, 10px font, tight padding */
+.ejf8_badges-container {
+  width: 80%;
+  margin: 10px auto 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ejf8_badge {
+  padding: 4px 2px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.ejf8_badge-icon {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+.ejf8_badge-vip      { background-color: #ee484e; }
+.ejf8_badge-bonus    { background-color: #000; }
+.ejf8_badge-shipping { background-color: #4a8b6c; }
+
+/* Highlight card (6 bottles) */
+.ejf8_card-highlight {
+  background: linear-gradient(180deg, #fae7b8 0, #fef6e0 100%);
+  border: 3px solid #000;
+  transform: scale(1.05);
+}
+.ejf8_card-highlight:hover { transform: scale(1.07) translateY(-2px); }
+.ejf8_card-ribbon {
+  background: #ee484e;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* Gold button arrow animation (👈🏻) */
+.ejf8_card-highlight .ejf8_buy-btn-gold { position: relative; overflow: visible; }
+.ejf8_card-highlight .ejf8_buy-btn-gold::after {
+  content: "👈🏻";
+  position: absolute;
+  right: -12px;
+  top: 95%;
+  font-size: 44px;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 9;
+  filter: drop-shadow(0 3px 2px rgba(0,0,0,.35)) drop-shadow(0 6px 6px rgba(0,0,0,.25));
+  animation: tsPoint 1.8s ease-in-out infinite;
+  transform: translateY(-50%) rotate(40deg);
+}
+@keyframes tsPoint {
+  0%, 100% { transform: translateY(-50%) translate(0,0) rotate(40deg); }
+  50%      { transform: translateY(-50%) translate(12px,8px) rotate(60deg); }
+}
+
+/* ---------- rating block (inside pricing section, light bg) ---------- */
+/* ref: o container tem classe .ejf8_atomicat-text que define font-family: Roboto.
+   O <p> filho herda. Cor do texto = #1C1E21. */
+.ejf8_rating-block,
+.ejf8_rating-block * {
+  font-family: 'Roboto', sans-serif;
+  color: #1C1E21;
+}
+.ejf8_rating-block {
+  max-width: 1140px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+.ejf8_rating-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.ejf8_rating-line {
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+.ejf8_stars { font-size: 22px; text-shadow: none; }
+.ejf8_rating-value { }
+.ejf8_rating-subtitle { font-size: 16px; font-weight: 400; text-shadow: none; }
+
+/* ---------- comments section (= ref nested en-US HTML) ----------
+   CSS vars herdadas da ref :root; valores tirados direto do HTML de referência */
+.ejf8_comments-section {
+  --surface: #f0f2f5;     /* bubble bg */
+  --stroke: rgba(0,0,0,.06);
+  --muted: #8a8d91;       /* meta text */
+  --radius: 18px;
+  --avatar: 35px;
+  --gap: 10px;
+  --pad: 14px;
+  --bubble-pad-y: 10px;
+  --bubble-pad-x: 12px;
+  --name-size: 14px;
+  --text-size: 15px;
+  --meta-size: 12px;
+
+  background: #101010;
+  padding: 40px 15px 60px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #1c1e21;
+}
+.ejf8_comments {
+  /* 3 cards × 300px + 2 gaps × 25px = 950px (largura visual do pricing row) */
+  max-width: 950px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: var(--pad);
+}
+.ejf8_comment {
+  display: flex;
+  gap: var(--gap);
+  margin-bottom: 16px;
+}
+.ejf8_comment-reply { margin-left: 45px; }
+.ejf8_comment-avatar {
+  width: var(--avatar);
+  height: var(--avatar);
+  border-radius: 999px;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: #e9eaec;
+}
+.ejf8_comment-content { flex: 1; min-width: 0; }
+.ejf8_comment-bubble {
+  background: var(--surface);
+  padding: var(--bubble-pad-y) var(--bubble-pad-x);
+  border-radius: var(--radius);
+  display: inline-block;
+  max-width: 100%;
+  line-height: 1.25;
+}
+.ejf8_comment-name {
+  color: #050505;
+  font-weight: 600;
+  font-size: var(--name-size);
+  margin-right: 6px;
+  white-space: nowrap;
+}
+.ejf8_comment-text {
+  margin-top: 4px;
+  font-size: var(--text-size);
+  line-height: 1.3333;
+  color: #050505;
+  font-weight: 400;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.ejf8_comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: var(--meta-size);
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.ejf8_comment-meta .ejf8_reactions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 2px 8px 2px 4px;
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-weight: 800;                 /* = ref .rx-count font-weight */
+  font-size: 12px;
+}
+/* ref: svg vai dentro de .rx (16x16 com borda + bg branco — deixa o ícone "grosso") */
+.ejf8_like-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.05);
+  background: #fff;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 768px) {
+  .ejf8_main-headline { font-size: 32px; }
+  .ejf8_timer-headline { font-size: 22px; }
+  .ejf8_timer-countdown { font-size: 44px; }
+  .ejf8_pricing-grid { gap: 15px; }
+  .ejf8_card-highlight { transform: scale(1); }
+  .ejf8_card-highlight:hover { transform: translateY(-2px); }
+  .ejf8_comment-reply { margin-left: 25px; }
+}
+@media (max-width: 480px) {
+  .ejf8_attention-bar { font-size: 13px; padding: 10px; }
+  .ejf8_main-headline { font-size: 26px; }
+  .ejf8_headline-section { padding: 25px 15px 10px; }
+  .ejf8_timer-headline { font-size: 18px; }
+  .ejf8_timer-countdown { font-size: 36px; }
+  .ejf8_pricing-grid {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5px;
+  }
+  .ejf8_pricing-grid .ejf8_card:nth-child(1) { order: 3; }
+  .ejf8_pricing-grid .ejf8_card:nth-child(2) { order: 1; }
+  .ejf8_pricing-grid .ejf8_card:nth-child(3) { order: 2; }
+  .ejf8_card { flex: 1 1 100%; max-width: 380px; width: 100%; }
+  .ejf8_price-big { font-size: 60px; }
+  .ejf8_card-highlight .ejf8_buy-btn-gold::after { font-size: 32px; right: -8px; }
+  .ejf8_video-wrapper { padding: 0 5px; }
+}
